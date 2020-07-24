@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EntityPredicates;
@@ -30,6 +31,12 @@ public class PlaneItem extends Item {
     }
 
     @Override
+    public boolean hasEffect(ItemStack stack)
+    {
+        return super.hasEffect(stack) || stack.getChildTag("EntityTag")!=null;
+    }
+
+    @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         RayTraceResult raytraceresult = rayTrace(worldIn, playerIn, RayTraceContext.FluidMode.ANY);
@@ -53,6 +60,11 @@ public class PlaneItem extends Item {
                 PlaneEntity planeEntity = planeSupplier.apply(worldIn);
                 planeEntity.setPosition(raytraceresult.getHitVec().getX(), raytraceresult.getHitVec().getY(), raytraceresult.getHitVec().getZ());
                 planeEntity.rotationYaw = playerIn.rotationYaw;
+                planeEntity.prevRotationYaw = playerIn.prevRotationYaw;
+                planeEntity.setCustomName(itemstack.getDisplayName());
+                CompoundNBT entityTag = itemstack.getChildTag("EntityTag");
+                if (entityTag!=null)
+                    planeEntity.readAdditional(entityTag);
                 if (!worldIn.hasNoCollisions(planeEntity, planeEntity.getBoundingBox().grow(-0.1D))) {
                     return ActionResult.resultFail(itemstack);
                 } else {

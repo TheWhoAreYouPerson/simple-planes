@@ -28,6 +28,7 @@
     "description.simpleplanes.booster": "Use gunpowder to boost your plane. Can only be applied to small planes.",
     "description.simpleplanes.floaty_bedding": "Makes plane float on water.",
     "description.simpleplanes.shooter": "Shoots fireworks or fire charges.",
+    "description.simpleplanes.folding": "Plane returns to players inventory upon departure.",
 
     "itemGroup.simpleplanes": "Simple Planes",
 
@@ -69,5 +70,6 @@
     "item.simpleplanes.atm_kousa_plane":  "Kousa Furnace Plane",
     "item.simpleplanes.atm_kousa_large_plane":  "Large Kousa Furnace Plane",
     "item.simpleplanes.atm_yucca_plane":  "Yucca Furnace Plane",
-    "item.simpleplanes.atm_yucca_large_plane":  "Large Yucca Furnace Plane"
+    "item.simpleplanes.atm_yucca_large_plane":  "Large Yucca Furnace Plane",
+    "death.attack.plane_crush": "Died in a plane crush"
  }
